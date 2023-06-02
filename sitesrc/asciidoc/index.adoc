@@ -1,10 +1,11 @@
 = Arjun Satarkar
+:docinfo: private-head
 
 [.centered]
-====
+--
 email: me@arjunsatarkar.net
 
 '''
 
-&#127775;
-====
+[#sparkle_loop]#&#127775;#
+--
