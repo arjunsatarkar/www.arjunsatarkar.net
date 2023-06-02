@@ -14,6 +14,7 @@ def parse_port(port_str: str):
         raise ValueError(f"port must be positive")
     return port
 
+
 parser = argparse.ArgumentParser(prog="www.arjunsatarkar.net server")
 parser.add_argument("--host", default="127.0.0.1")
 parser.add_argument("--port", default=9001, type=parse_port)
