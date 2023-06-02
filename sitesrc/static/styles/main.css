@@ -1,0 +1,25 @@
+body {
+	font-family: monospace;
+	font-size: 1.5rem;
+    background-color: black;
+    color: white;
+}
+
+#header, div.centered {
+	text-align: center;
+}
+
+a:link {
+    color: lightskyblue;
+}
+
+a:visited {
+    color: mediumpurple;
+}
+
+@media (orientation: landscape) {
+	body {
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+}
