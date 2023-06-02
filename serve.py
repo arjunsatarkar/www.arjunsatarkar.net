@@ -30,7 +30,12 @@ def index():
 
 @bottle.route("/static/<static_file_path:path>")
 def static(static_file_path):
-    return bottle.static_file(static_file_path, SITE_ROOT / "static")
+    mimetype = "auto"
+    # Bottle by default uses application/javascript which is no longer standard https://2ality.com/2022/05/rfc-9239.html
+    # This also causes non-inclusion of charset, which is problematic. Hence, we override.
+    if static_file_path.endswith(".js"):
+        mimetype="text/javascript; charset=utf-8"
+    return bottle.static_file(static_file_path, SITE_ROOT / "static", mimetype)
 
 
 @bottle.error(404)
