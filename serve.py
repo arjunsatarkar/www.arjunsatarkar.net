@@ -8,16 +8,18 @@ import pathlib
 import bottle
 
 
-def parse_port(port_str: str):
+def port(port_str: str):
     port = int(port_str)
     if port <= 0:
-        raise ValueError(f"port must be positive")
+        raise ValueError("port must be positive")
+    elif port > 65535:
+        raise ValueError("port must be 65535 or below")
     return port
 
 
 parser = argparse.ArgumentParser(prog="www.arjunsatarkar.net server")
 parser.add_argument("--host", default="127.0.0.1")
-parser.add_argument("--port", default=9001, type=parse_port)
+parser.add_argument("--port", default=9001, type=port)
 args = parser.parse_args()
 
 SITE_ROOT = pathlib.Path("sitebuild")
