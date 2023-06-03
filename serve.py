@@ -38,6 +38,11 @@ def static(static_file_path):
     return bottle.static_file(static_file_path, SITE_ROOT / "static", mimetype)
 
 
+@bottle.route("/favicon.ico")
+def root_favicon():
+    return bottle.redirect("/static/media/favicon.ico")
+
+
 @bottle.error(404)
 def error404(error):
     response = bottle.static_file("404.html", SITE_ROOT / "html")
