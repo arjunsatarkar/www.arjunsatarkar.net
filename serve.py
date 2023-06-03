@@ -40,7 +40,7 @@ def static(static_file_path):
 
 @bottle.error(404)
 def error404(error):
-    response = bottle.static_file("404.html", SITE_ROOT)
+    response = bottle.static_file("404.html", SITE_ROOT / "html")
     response.status = 404
     return response
 

@@ -1,0 +1,8 @@
+= error 404 &ndash; page not found
+
+'''
+
+[.centered]
+--
+link:/[home]
+--
