@@ -8,7 +8,7 @@ import pathlib
 import bottle
 
 
-def port(port_str: str):
+def port(port_str: str) -> int:
     port = int(port_str)
     if port <= 0:
         raise ValueError("port must be positive")
@@ -46,7 +46,7 @@ def root_favicon():
 
 
 @bottle.error(404)
-def error404(error):
+def error404(_):
     response = bottle.static_file("404.html", SITE_ROOT / "html")
     response.status = 404
     return response

@@ -2,7 +2,8 @@
 
 '''
 
-[.centered]
+[.text-center]
 --
 link:/[home]
 --
+include::inclusions/shared_end_section.adoc[]

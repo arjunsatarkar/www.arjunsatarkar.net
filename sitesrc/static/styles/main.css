@@ -1,12 +1,17 @@
 body {
 	font-family: monospace;
 	font-size: 1.5rem;
-    background-color: black;
-    color: white;
+	background-color: black;
+	color: white;
 }
 
-#header, div.centered {
+.text-center, #header {
 	text-align: center;
+}
+
+#end-section {
+	font-size: smaller;
+	text-align: right;
 }
 
 a:link {
@@ -16,6 +21,8 @@ a:link {
 a:visited {
     color: mediumpurple;
 }
+
+
 
 @media (orientation: landscape) {
 	body {

@@ -1,7 +1,7 @@
 = Arjun Satarkar
 :docinfo: private-head
 
-[.centered]
+[.text-center]
 --
 email: me@arjunsatarkar.net
 
@@ -9,3 +9,4 @@ email: me@arjunsatarkar.net
 
 [#sparkle_loop]#&#127775;#
 --
+include::inclusions/shared_end_section.adoc[]
