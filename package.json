@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "cssnano": "^6.0.1",
+    "postcss": "^8.4.24",
+    "postcss-cli": "^10.1.0",
+    "terser": "^5.17.7"
+  }
+}
