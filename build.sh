@@ -7,24 +7,27 @@ mkdir -p sitebuild
 
 asciidoctor -a webfonts! -a last-update-label! -a stylesheet=main.css -a stylesdir=/static/styles -a linkcss -a copycss! -a favicon=/static/media/favicon.svg -a docinfodir=docinfo --destination-dir=sitebuild/html sitesrc/asciidoc/*.adoc
 
-basic_build_static () {
-    cp -r sitesrc/static sitebuild/
-}
-
-basic_build_static
+cp -r sitesrc/static sitebuild/
 
 {
-    cd sitesrc/static/scripts/ &&
+    cd "$BASEDIR/sitebuild/static/scripts/" &&
     for f in *.js; do
-        npx terser "$f" > "$BASEDIR/sitebuild/static/scripts/$f"
-    done &&
-    cd "$BASEDIR/sitesrc/static/styles/" &&
+        npx terser "$f" -o "$f"
+    done
+} || true
+
+{
+    cd "$BASEDIR/sitebuild/static/styles/" &&
     for f in *.css; do
-        npx postcss "$f" > "$BASEDIR/sitebuild/static/styles/$f"
-    done &&
-    cd "$BASEDIR"
-} || {
-    >&2 echo "WARN: minify step failed; proceeding without minification."
-    cd "$BASEDIR" &&
-    basic_build_static
-}
+        npx postcss "$f" --replace
+    done
+} || true
+
+{
+    cd "$BASEDIR/sitebuild/html" &&
+    for f in *.html; do
+        "$BASEDIR/html_minify.py" "$f"
+    done
+} || true
+
+cd "$BASEDIR"
