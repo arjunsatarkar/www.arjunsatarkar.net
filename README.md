@@ -4,7 +4,7 @@ See [the live site](https://www.arjunsatarkar.net/).
 
 ## Notice
 
-www.arjunsatarkar.net is copyright © 2023-present Arjun Satarkar.
+<span>www</span>.<span>arjunsatarkar</span>.<span>net</span> is copyright © 2023-present Arjun Satarkar.
 
 It is intended specifically and only to run https://www.arjunsatarkar.net, and is not useful as a generic static site generator or CMS.
 
