@@ -5,6 +5,8 @@
 --
 email: me@arjunsatarkar.net
 
+[#sitelinks]#🌐 https://scm.arjunsatarkar.net[source code] | https://admin.arjunsatarkar.net[admin]#
+
 '''
 
 [#sparkle_loop]#&#127775;#
