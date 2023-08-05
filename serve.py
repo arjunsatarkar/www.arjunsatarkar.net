@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-import gevent.monkey
-
-gevent.monkey.patch_all()
+import gunicorn
 
 import argparse
 import pathlib
@@ -27,7 +25,7 @@ SITE_ROOT = pathlib.Path("sitebuild")
 
 @bottle.route("/")
 def index():
-    return bottle.static_file("index.html", SITE_ROOT / "html")
+    return bottle.static_file("index.html", SITE_ROOT)
 
 
 @bottle.route("/static/<static_file_path:path>")
@@ -47,10 +45,10 @@ def root_favicon():
 
 @bottle.error(404)
 def error404(_):
-    response = bottle.static_file("404.html", SITE_ROOT / "html")
+    response = bottle.static_file("404.html", SITE_ROOT)
     response.status = 404
     return response
 
 
 if __name__ == "__main__":
-    bottle.run(host=args.host, port=args.port, server="gevent", debug=False)
+    bottle.run(host=args.host, port=args.port, server="gunicorn")
