@@ -13,7 +13,6 @@ It is intended specifically and only to run https://www.arjunsatarkar.net, and i
 Prerequisites:
 - [Python](https://www.python.org/downloads/) 3.11 or later (might work on some earlier versions)
 - [Asciidoctor](https://asciidoctor.org/)
-- (Optional, for minification) [NodeJS](https://nodejs.org/en/download) 18 (might work on later or earlier versions)
 
 Initial setup:
 ```bash
@@ -22,7 +21,6 @@ cd www.arjunsatarkar.net/
 python -m venv ./venv/
 source venv/bin/activate
 pip install -r requirements.txt
-npm install # Optional
 ```
 
 Build site:
