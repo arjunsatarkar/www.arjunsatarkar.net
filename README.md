@@ -1,21 +1,18 @@
-# WwwArjunsatarkarNet
+# www.arjunsatarkar.net
 
-**TODO: Add description**
+See [the live site](https://www.arjunsatarkar.net/).
 
-## Installation
+## Notice
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `www_arjunsatarkar_net` to your list of dependencies in `mix.exs`:
+<span>www</span>.<span>arjunsatarkar</span>.<span>net</span> is copyright © 2023-present Arjun Satarkar.
 
-```elixir
-def deps do
-  [
-    {:www_arjunsatarkar_net, "~> 0.1.0"}
-  ]
-end
+It is intended specifically and only to run https://www.arjunsatarkar.net, and is not useful as a generic static site generator or CMS.
+
+## Usage
+
+Prerequisites:
+- [Elixir](https://elixir-lang.org/)
+
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/www_arjunsatarkar_net>.
-
+mix run --no-halt
+```
