@@ -13,7 +13,8 @@ defmodule WwwArjunsatarkarNet.Application do
     children = [
       # Starts a worker by calling: WwwArjunsatarkarNet.Worker.start_link(arg)
       # {WwwArjunsatarkarNet.Worker, arg}
-      {Plug.Cowboy, scheme: :http, plug: WwwArjunsatarkarNet.Router, ip: {127, 0, 0, 1}, port: port}
+      {Plug.Cowboy,
+       scheme: :http, plug: WwwArjunsatarkarNet.Router, ip: {127, 0, 0, 1}, port: port}
     ]
 
     Logger.info("Starting server on http://127.0.0.1:" <> Integer.to_string(port) <> "/ ...")

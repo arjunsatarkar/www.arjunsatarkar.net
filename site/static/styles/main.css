@@ -56,7 +56,7 @@ div#site_src_block {
 
 .startext {
     font-weight: bold;
-    background-image: url("/static/media/Starsinthesky/Starsinthesky.jpg");
+    background-image: url("/static/media/Starsinthesky/Starsinthesky.webp");
     background-clip: text;
     -webkit-background-clip: text;
     background-position: center;
