@@ -1,17 +1,16 @@
+<%
+    title = "error 404 - page not found"
+%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>error 404 - page not found</title>
-    <link rel="stylesheet" href="/static/styles/main.css">
-    <link rel="icon" href="/static/media/favicon.svg" type="image/svg+xml">
+<%= generate_head_tags.(title, nil, nil) %>
 </head>
 
 <body>
     <header>
-        <h1>error 404 - page not found</h1>
+        <h1><%= title %></h1>
     </header>
     <main>
         <a href="/">home</a>
