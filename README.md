@@ -16,7 +16,7 @@ Prerequisites:
 
 Provide the `PORT` environment variable to set a port (default 8000).
 
-Running this behind a reverse proxy that clears the X-Forwarded-Host, X-Forwarded-Port, and X-Forwarded-Scheme
+Running this behind a reverse proxy that clears the X-Forwarded-Host, X-Forwarded-Port, and X-Forwarded-Proto
 headers and sets them correctly is required.
 
 Interactive:
