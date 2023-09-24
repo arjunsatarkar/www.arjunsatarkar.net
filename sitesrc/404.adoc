@@ -1,9 +1,0 @@
-= error 404 &ndash; page not found
-
-'''
-
-[.text-center]
---
-link:/[home]
---
-include::inclusions/shared_end_section.adoc[]

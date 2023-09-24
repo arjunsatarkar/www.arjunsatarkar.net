@@ -1,0 +1,66 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: monospace;
+    font-size: 1.5rem;
+}
+
+
+@media (orientation: landscape) {
+    body {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+header {
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+header,
+main,
+footer {
+    text-align: center;
+}
+
+a:link {
+    color: lightskyblue;
+}
+
+a:visited {
+    color: mediumpurple;
+}
+
+address {
+    display: inline;
+    font-style: normal;
+}
+
+nav#sitelinks {
+    font-size: smaller;
+}
+
+hr {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+footer {
+    font-size: smaller;
+}
+
+div#page_src_block {
+    text-align: right;
+}
+
+.startext {
+    font-weight: bold;
+    background-image: url("/static/media/Starsinthesky/Starsinthesky.jpg");
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-position: center;
+    background-size: 50% auto;
+    color: transparent;
+    display: inline;
+}

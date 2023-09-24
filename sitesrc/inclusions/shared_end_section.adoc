@@ -1,4 +1,0 @@
-[#end-section]
---
-&#91;https://scm.arjunsatarkar.net/www.arjunsatarkar.net/tree/sitesrc/asciidoc/{docname}{docfilesuffix}[page src]]
---
