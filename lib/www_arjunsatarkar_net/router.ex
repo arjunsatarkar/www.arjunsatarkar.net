@@ -2,7 +2,7 @@ defmodule WwwArjunsatarkarNet.Router do
   require EEx
   use Plug.Router
   plug(Plug.Logger)
-  plug Plug.RewriteOn, [:x_forwarded_host]
+  plug(Plug.RewriteOn, [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto])
   plug(Plug.Head)
   plug(Plug.Static, at: "/static", from: "site/static")
   plug(:match)
@@ -18,7 +18,13 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   get "/" do
-    canonical_url = Atom.to_string(conn.scheme) <> "://" <> conn.host <> conn.request_path
+    canonical_url =
+      URI.to_string(%URI{
+        host: conn.host,
+        path: conn.request_path,
+        port: conn.port,
+        scheme: Atom.to_string(conn.scheme)
+      })
 
     conn
     |> put_html_content_type()

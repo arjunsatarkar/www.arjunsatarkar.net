@@ -6,7 +6,8 @@ See [the live site](https://www.arjunsatarkar.net/).
 
 <span>www</span>.<span>arjunsatarkar</span>.<span>net</span> is copyright © 2023-present Arjun Satarkar.
 
-It is intended specifically and only to run https://www.arjunsatarkar.net, and is not useful as a generic static site generator or CMS.
+It is intended specifically and only to run https://www.arjunsatarkar.net, and is not useful as a generic static site
+generator or CMS.
 
 ## Usage
 
@@ -15,8 +16,8 @@ Prerequisites:
 
 Provide the `PORT` environment variable to set a port (default 8000).
 
-Running this behind a reverse proxy that clears "X-Forwarded-Host" and sets it
-to the correct one (i.e. www.arjunsatarkar.net) is required.
+Running this behind a reverse proxy that clears the X-Forwarded-Host, X-Forwarded-Port, and X-Forwarded-Scheme
+headers and sets them correctly is required.
 
 Interactive:
 ```
