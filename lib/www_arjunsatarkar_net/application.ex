@@ -8,13 +8,15 @@ defmodule WwwArjunsatarkarNet.Application do
 
   @impl true
   def start(_type, _args) do
+    {:ok, port} = Application.fetch_env(:www_arjunsatarkar_net, :port)
+
     children = [
       # Starts a worker by calling: WwwArjunsatarkarNet.Worker.start_link(arg)
       # {WwwArjunsatarkarNet.Worker, arg}
-      {Plug.Cowboy, scheme: :http, plug: WwwArjunsatarkarNet.Router, port: 8000}
+      {Plug.Cowboy, scheme: :http, plug: WwwArjunsatarkarNet.Router, port: port}
     ]
 
-    Logger.info("Starting server...")
+    Logger.info("Starting server on port " <> Integer.to_string(port) <> "...")
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

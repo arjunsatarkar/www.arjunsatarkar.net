@@ -13,6 +13,20 @@ It is intended specifically and only to run https://www.arjunsatarkar.net, and i
 Prerequisites:
 - [Elixir](https://elixir-lang.org/)
 
+Provide the `PORT` environment variable to set a port (default 8000).
+
+Interactive:
+```
+iex -S mix
+```
+
+Development:
 ```
 mix run --no-halt
+```
+
+Release:
+```
+MIX_ENV=prod mix release
+_build/prod/rel/www_arjunsatarkar_net/bin/www_arjunsatarkar_net start
 ```
