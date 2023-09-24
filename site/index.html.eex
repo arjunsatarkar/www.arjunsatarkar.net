@@ -1,18 +1,23 @@
+<%
+    title = "Arjun Satarkar"
+    description = "Arjun Satarkar's home page."
+%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arjun Satarkar</title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/static/styles/main.css">
     <link rel="icon" href="/static/media/favicon.svg" type="image/svg+xml">
     <script src="/static/scripts/sparkle_loop.js" defer></script>
-    <meta name="description" content="Arjun Satarkar's home page.">
-    <meta property="og:title" content="Arjun Satarkar" />
+    <meta name="description" content="<%= description %>">
+    <meta property="og:title" content="<%= title %>" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.arjunsatarkar.net/" />
+    <meta property="og:url" content="<%= canonical_url %>" />
     <meta property="og:image" content="https://www.arjunsatarkar.net/static/media/favicon.png" />
+    <meta property="og:description" content="<%= description %>" />
 </head>
 
 <body>

@@ -1,9 +1,11 @@
 defmodule WwwArjunsatarkarNet.Router do
+  require EEx
   use Plug.Router
   plug(Plug.Logger)
   plug(Plug.Static, at: "/static", from: "site/static")
   plug(:match)
   plug(:dispatch)
+
 
   defp put_html_content_type(conn) do
     put_resp_content_type(conn, "text/html")
@@ -15,9 +17,10 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   get "/" do
+    canonical_url = Atom.to_string(conn.scheme) <> "://" <> conn.host <> conn.request_path
     conn
     |> put_html_content_type()
-    |> Plug.Conn.send_file(200, "site/index.html")
+    |> send_resp(200, EEx.eval_file("site/index.html.eex", canonical_url: canonical_url))
   end
 
   get "/favicon.ico" do
