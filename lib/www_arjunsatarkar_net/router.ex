@@ -9,10 +9,20 @@ defmodule WwwArjunsatarkarNet.Router do
     put_resp_content_type(conn, "text/html")
   end
 
+  defp redirect(conn, dest) do
+    put_resp_header(conn, "Location", dest)
+    |> send_resp(302, "")
+  end
+
   get "/" do
     conn
     |> put_html_content_type()
     |> Plug.Conn.send_file(200, "site/index.html")
+  end
+
+  get "/favicon.ico" do
+    conn
+    |> redirect("/static/media/favicon.ico")
   end
 
   match _ do
