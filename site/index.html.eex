@@ -15,8 +15,8 @@
         <h1 class="startext"><%= title %></h1>
     </header>
     <main>
-        <span>email: <address><a href="mailto:me@arjunsatarkar.net">me@arjunsatarkar.net</a></address></span>
-        <br><br>
+        <div>email: <address><a href="mailto:me@arjunsatarkar.net">me@arjunsatarkar.net</a></address></div>
+        <br>
         <nav id="sitelinks">🌐 <a href="https://scm.arjunsatarkar.net/">source code</a> | <a
                 href="https://admin.arjunsatarkar.net">admin</a></nav><br>
         <span id="sparkle_loop">🌟</span>
