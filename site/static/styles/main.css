@@ -1,6 +1,10 @@
+:root {
+    --text-color: white;
+}
+
 body {
     background-color: black;
-    color: white;
+    color: var(--text-color);
     font-family: monospace;
     font-size: 1.5rem;
 }
@@ -56,7 +60,7 @@ div#site_src_block {
 
 .startext {
     font-weight: bold;
-    background-image: url("/static/media/Starsinthesky/Starsinthesky.webp");
+    background: url("/static/media/Starsinthesky/Starsinthesky.webp"), var(--text-color);
     background-clip: text;
     -webkit-background-clip: text;
     background-position: center;
