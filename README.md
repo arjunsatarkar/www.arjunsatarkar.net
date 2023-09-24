@@ -15,6 +15,9 @@ Prerequisites:
 
 Provide the `PORT` environment variable to set a port (default 8000).
 
+Running this behind a reverse proxy that clears "X-Forwarded-Host" and sets it
+to the correct one (i.e. www.arjunsatarkar.net) is required.
+
 Interactive:
 ```
 iex -S mix

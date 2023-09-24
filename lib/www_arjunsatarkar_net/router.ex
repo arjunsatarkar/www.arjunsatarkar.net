@@ -2,6 +2,7 @@ defmodule WwwArjunsatarkarNet.Router do
   require EEx
   use Plug.Router
   plug(Plug.Logger)
+  plug Plug.RewriteOn, [:x_forwarded_host]
   plug(Plug.Head)
   plug(Plug.Static, at: "/static", from: "site/static")
   plug(:match)
