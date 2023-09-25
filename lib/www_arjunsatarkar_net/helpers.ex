@@ -1,6 +1,6 @@
 defmodule WwwArjunsatarkarNet.Helpers do
-  @spec generate_head_tags(binary, binary, binary) :: binary
-  def generate_head_tags(title, canonical_url, description) do
+  @spec generate_head_tags(binary, binary | nil, binary | nil) :: binary
+  def generate_head_tags(title, canonical_url \\ nil, description \\ nil) do
     result =
       """
           <meta charset="UTF-8">

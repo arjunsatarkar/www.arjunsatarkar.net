@@ -14,10 +14,10 @@ generator or CMS.
 Prerequisites:
 - [Elixir](https://elixir-lang.org/)
 
-Provide the `PORT` environment variable to set a port (default 8000).
+Provide the `PORT` environment variable at runtime to set a port (default 8000).
 
-Running this behind a reverse proxy that clears the X-Forwarded-Host, X-Forwarded-Port, and X-Forwarded-Proto
-headers and sets them correctly is required.
+Build with environment variable PROXIED=1 to use the X-Forwarded-Host, X-Forwarded-Port, and X-Forwarded-Proto
+headers. Ensure that the proxy actually sets these.
 
 Interactive:
 ```

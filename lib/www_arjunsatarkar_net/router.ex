@@ -1,8 +1,13 @@
 defmodule WwwArjunsatarkarNet.Router do
+  alias WwwArjunsatarkarNet.Helpers
   require EEx
   use Plug.Router
   plug(Plug.Logger)
-  plug(Plug.RewriteOn, [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto])
+
+  if Application.compile_env(:www_arjunsatarkar_net, :proxied) == true do
+    plug(Plug.RewriteOn, [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto])
+  end
+
   plug(Plug.Head)
   plug(Plug.Static, at: "/static", from: "site/static")
   plug(:match)
@@ -18,6 +23,8 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   get "/" do
+    title = "Arjun Satarkar"
+
     canonical_url =
       URI.to_string(%URI{
         host: conn.host,
@@ -26,13 +33,16 @@ defmodule WwwArjunsatarkarNet.Router do
         scheme: Atom.to_string(conn.scheme)
       })
 
+    head_tags =
+      Helpers.generate_head_tags(title, canonical_url, "Arjun Satarkar's home page.")
+
     conn
     |> put_html_content_type()
     |> send_resp(
       200,
       EEx.eval_file("site/index.html.eex",
-        generate_head_tags: &WwwArjunsatarkarNet.Helpers.generate_head_tags/3,
-        canonical_url: canonical_url
+        head_tags: head_tags,
+        title: title
       )
     )
   end
@@ -43,12 +53,17 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   match _ do
+    title = "error 404 - page not found"
+    head_tags = Helpers.generate_head_tags(title)
+
     conn
     |> put_html_content_type()
     |> send_resp(
       404,
-      EEx.eval_file("site/404.html.eex",
-        generate_head_tags: &WwwArjunsatarkarNet.Helpers.generate_head_tags/3
+      EEx.eval_file(
+        "site/404.html.eex",
+        head_tags: head_tags,
+        title: title
       )
     )
   end

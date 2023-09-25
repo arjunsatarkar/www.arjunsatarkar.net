@@ -1,12 +1,8 @@
-<%
-    title = "Arjun Satarkar"
-    description = "Arjun Satarkar's home page."
-%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<%= generate_head_tags.(title, canonical_url, description) %>
+<%= head_tags %>
     <script src="/static/scripts/sparkle_loop.js" defer></script>
 </head>
 
