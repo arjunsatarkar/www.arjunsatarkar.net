@@ -1,8 +1,12 @@
+<%
+title = "Arjun Satarkar"
+description = "Arjun Satarkar's home page"
+%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<%= head_tags %>
+<%= generate_head_tags.(title, canonical_url, description) %>
     <script src="/static/scripts/sparkle_loop.js" defer></script>
 </head>
 
@@ -19,11 +23,13 @@
     </main>
     <footer>
         <hr>
-        <details id="attributions">
-            <summary>attributions</summary>
-            <span class="startext">starry text texture:</span> <a
-                href="https://commons.wikimedia.org/wiki/File:Starsinthesky.jpg">ESA/Hubble</a>, <a
-                href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>, via Wikimedia Commons
+        <details>
+            <summary>attribution</summary>
+            <ul>
+                <li>
+                    <a href="/static/media/Starsinthesky/ATTRIBUTION.txt">starry text texture</a>
+                </li>
+            </ul>
         </details>
         <div id="site_src_block">
             [<a href="https://scm.arjunsatarkar.net/www.arjunsatarkar.net">site src</a>]

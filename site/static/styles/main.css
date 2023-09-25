@@ -58,6 +58,11 @@ div#site_src_block {
     text-align: right;
 }
 
+ul {
+    display: table;
+    margin: 0 auto;
+}
+
 .startext {
     font-weight: bold;
     background: url("/static/media/Starsinthesky/2560px-Starsinthesky.webp"), var(--text-color);

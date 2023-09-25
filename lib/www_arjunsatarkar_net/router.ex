@@ -4,11 +4,19 @@ defmodule WwwArjunsatarkarNet.Router do
   use Plug.Router
   plug(Plug.Logger)
 
-  if Application.compile_env(:www_arjunsatarkar_net, :proxied) == true do
+  if Application.compile_env(:www_arjunsatarkar_net, :proxied) do
     plug(Plug.RewriteOn, [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto])
   end
 
   plug(Plug.Head)
+
+  # Handle just the scripts first so we can make sure charset is UTF-8.
+  plug(Plug.Static,
+    at: "/static/scripts",
+    from: "site/static/scripts",
+    headers: %{"Content-Type" => "text/javascript; charset=utf-8"}
+  )
+
   plug(Plug.Static, at: "/static", from: "site/static")
   plug(:match)
   plug(:dispatch)
@@ -23,8 +31,6 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   get "/" do
-    title = "Arjun Satarkar"
-
     canonical_url =
       URI.to_string(%URI{
         host: conn.host,
@@ -33,16 +39,13 @@ defmodule WwwArjunsatarkarNet.Router do
         scheme: Atom.to_string(conn.scheme)
       })
 
-    head_tags =
-      Helpers.generate_head_tags(title, canonical_url, "Arjun Satarkar's home page.")
-
     conn
     |> put_html_content_type()
     |> send_resp(
       200,
       EEx.eval_file("site/index.html.eex",
-        head_tags: head_tags,
-        title: title
+        generate_head_tags: &Helpers.generate_head_tags/3,
+        canonical_url: canonical_url
       )
     )
   end
@@ -53,17 +56,13 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   match _ do
-    title = "error 404 - page not found"
-    head_tags = Helpers.generate_head_tags(title)
-
     conn
     |> put_html_content_type()
     |> send_resp(
       404,
       EEx.eval_file(
         "site/404.html.eex",
-        head_tags: head_tags,
-        title: title
+        generate_head_tags: &Helpers.generate_head_tags/1
       )
     )
   end

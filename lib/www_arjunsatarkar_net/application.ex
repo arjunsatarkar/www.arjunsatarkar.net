@@ -17,7 +17,7 @@ defmodule WwwArjunsatarkarNet.Application do
        scheme: :http, plug: WwwArjunsatarkarNet.Router, ip: {127, 0, 0, 1}, port: port}
     ]
 
-    Logger.info("Starting server on http://127.0.0.1:" <> Integer.to_string(port) <> "/ ...")
+    Logger.info("Starting server on http://127.0.0.1:#{Integer.to_string(port)}/ ...")
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
