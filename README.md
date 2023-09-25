@@ -16,8 +16,10 @@ Prerequisites:
 
 Provide the `PORT` environment variable at runtime to set a port (default 8000).
 
-Build with environment variable PROXIED=1 to use the X-Forwarded-Host, X-Forwarded-Port, and X-Forwarded-Proto
+Build with environment variable `PROXIED=1` to use the `X-Forwarded-Host`, `X-Forwarded-Port`, and `X-Forwarded-Proto`
 headers. Ensure that the proxy actually sets these.
+
+If changing the value of `PROXIED`, run `mix deps.clean www_arjunsatarkar_net --build` first.
 
 Interactive:
 ```
