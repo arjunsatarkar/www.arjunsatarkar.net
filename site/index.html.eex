@@ -15,7 +15,9 @@ description = "Arjun Satarkar's home page"
         <h1 class="startext"><%= title %></h1>
     </header>
     <main>
-        <div>email: <address><a href="mailto:me@arjunsatarkar.net">me@arjunsatarkar.net</a></address></div>
+        <address style="font-style: normal;">
+            email: <a href="mailto:me@arjunsatarkar.net">me@arjunsatarkar.net</a>
+        </address>
         <br>
         <nav id="sitelinks">🌐 <a href="https://scm.arjunsatarkar.net/">source code</a> | <a
                 href="https://admin.arjunsatarkar.net">admin</a></nav><br>

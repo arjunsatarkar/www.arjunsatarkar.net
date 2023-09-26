@@ -13,36 +13,37 @@ defmodule WwwArjunsatarkarNet.Helpers do
       """
 
     result =
-      if canonical_url != nil do
-        result <>
-          """
-              <link rel="canonical" href="#{canonical_url}">
+      result <>
+        if canonical_url != nil do
+          result <>
+            """
+                <link rel="canonical" href="#{canonical_url}">
 
-              <meta property="og:url" content="#{canonical_url}">
-              <meta property="og:title" content="#{title}">
-              <meta property="og:type" content="website">
-              <meta property="og:image" content="https://www.arjunsatarkar.net/static/media/favicon.png">
-          """
-      else
-        result
-      end
+                <meta property="og:url" content="#{canonical_url}">
+                <meta property="og:title" content="#{title}">
+                <meta property="og:type" content="website">
+                <meta property="og:image" content="https://www.arjunsatarkar.net/static/media/favicon.png">
+            """
+        else
+          ""
+        end
 
     result =
-      if description != nil do
-        result <>
+      result <>
+        if description != nil do
           """
               <meta name="description" content="#{description}">
           """ <>
-          if canonical_url != nil do
-            """
-                <meta property="og:description" content="#{description}">
-            """
-          else
-            ""
-          end
-      else
-        result
-      end
+            if canonical_url != nil do
+              """
+                  <meta property="og:description" content="#{description}">
+              """
+            else
+              ""
+            end
+        else
+          ""
+        end
 
     result
   end

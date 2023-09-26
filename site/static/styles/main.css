@@ -36,11 +36,6 @@ a:visited {
     color: mediumpurple;
 }
 
-address {
-    display: inline;
-    font-style: normal;
-}
-
 nav#sitelinks {
     font-size: smaller;
 }
