@@ -26,7 +26,8 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   defp redirect(conn, dest) do
-    put_resp_header(conn, "Location", dest)
+    conn
+    |> put_resp_header("Location", dest)
     |> send_resp(302, "")
   end
 
@@ -34,7 +35,7 @@ defmodule WwwArjunsatarkarNet.Router do
     canonical_url =
       URI.to_string(%URI{
         host: conn.host,
-        path: conn.request_path,
+        path: "/",
         port: conn.port,
         scheme: Atom.to_string(conn.scheme)
       })
