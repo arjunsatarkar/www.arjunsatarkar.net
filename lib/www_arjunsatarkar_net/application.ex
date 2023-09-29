@@ -8,6 +8,8 @@ defmodule WwwArjunsatarkarNet.Application do
 
   @impl true
   def start(_type, _args) do
+    WwwArjunsatarkarNet.Template.compile()
+
     {:ok, port} = Application.fetch_env(:www_arjunsatarkar_net, :port)
 
     children = [
@@ -17,7 +19,9 @@ defmodule WwwArjunsatarkarNet.Application do
        scheme: :http, plug: WwwArjunsatarkarNet.Router, ip: {127, 0, 0, 1}, port: port}
     ]
 
-    Logger.info("Starting server on http://127.0.0.1:#{Integer.to_string(port)}/ ...")
+    System.no_halt(true)
+
+    Logger.info("Starting server on http://127.0.0.1:#{Integer.to_string(port)} ...")
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

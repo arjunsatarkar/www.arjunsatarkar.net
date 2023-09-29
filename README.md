@@ -28,7 +28,7 @@ iex -S mix
 
 Development:
 ```
-mix run --no-halt
+mix run
 ```
 
 Release:

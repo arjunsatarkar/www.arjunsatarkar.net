@@ -1,6 +1,6 @@
 defmodule WwwArjunsatarkarNet.Router do
+  alias WwwArjunsatarkarNet.Template
   alias WwwArjunsatarkarNet.Helpers
-  require EEx
   use Plug.Router
   plug(Plug.Logger)
 
@@ -21,10 +21,12 @@ defmodule WwwArjunsatarkarNet.Router do
   plug(:match)
   plug(:dispatch)
 
+  @spec put_html_content_type(Plug.Conn.t()) :: Plug.Conn.t()
   defp put_html_content_type(conn) do
     put_resp_content_type(conn, "text/html")
   end
 
+  @spec redirect(Plug.Conn.t(), binary) :: Plug.Conn.t()
   defp redirect(conn, dest) do
     conn
     |> put_resp_header("Location", dest)
@@ -40,14 +42,17 @@ defmodule WwwArjunsatarkarNet.Router do
         scheme: Atom.to_string(conn.scheme)
       })
 
+    {page, _bindings} =
+      Code.eval_quoted(Template.get_compiled("site/index.html.eex"),
+        canonical_url: canonical_url,
+        generate_head_tags: &Helpers.generate_head_tags/3
+      )
+
     conn
     |> put_html_content_type()
     |> send_resp(
       200,
-      EEx.eval_file("site/index.html.eex",
-        generate_head_tags: &Helpers.generate_head_tags/3,
-        canonical_url: canonical_url
-      )
+      page
     )
   end
 
@@ -57,14 +62,16 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   match _ do
+    {page, _bindings} =
+      Code.eval_quoted(Template.get_compiled("site/404.html.eex"),
+        generate_head_tags: &Helpers.generate_head_tags/1
+      )
+
     conn
     |> put_html_content_type()
     |> send_resp(
       404,
-      EEx.eval_file(
-        "site/404.html.eex",
-        generate_head_tags: &Helpers.generate_head_tags/1
-      )
+      page
     )
   end
 
