@@ -10,8 +10,8 @@ defmodule WwwArjunsatarkarNet.Template do
     parent = self()
     # Let's use a separate process that sleeps forever when done to ensure that the only thing
     # that inserts into our :compiled_templates ETS table is this function (not eg. the caller.)
-    {_, ref} =
-      spawn_monitor(fn ->
+    pid =
+      spawn_link(fn ->
         :ets.new(:compiled_templates, [:named_table, {:read_concurrency, true}])
 
         for file_name <- template_file_names do
@@ -19,19 +19,16 @@ defmodule WwwArjunsatarkarNet.Template do
           :ets.insert(:compiled_templates, {file_name, EEx.compile_file(file_name)})
         end
 
-        send(parent, :compile_templates_done)
-
         Logger.info("Finished compiling templates.")
+
+        send(parent, {:compile_templates_done, self()})
 
         Process.sleep(:infinity)
       end)
 
     receive do
-      :compile_templates_done -> nil
-      {:DOWN, ^ref, _, _, reason} -> exit({:compiling_templates_failed, reason})
+      {:compile_templates_done, ^pid} -> nil
     end
-
-    nil
   end
 
   @spec get_compiled(binary()) :: any
