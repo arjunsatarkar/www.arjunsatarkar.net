@@ -36,19 +36,11 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   get "/" do
-    canonical_url =
-      URI.to_string(%URI{
-        host: conn.host,
-        path: "/",
-        port: conn.port,
-        scheme: Atom.to_string(conn.scheme)
-      })
-
     page =
       Cache.get_cached("/",
         else:
           Template.eval_compiled("site/index.html.eex",
-            canonical_url: canonical_url,
+            canonical_url: Helpers.get_canonical_url("/"),
             generate_head_tags: &Helpers.generate_head_tags/3
           )
       )

@@ -1,8 +1,8 @@
 defmodule WwwArjunsatarkarNet.Template do
   require EEx
   require Logger
-  @spec compile :: nil
-  def compile do
+  @spec compile_templates :: nil
+  def compile_templates do
     {:ok, template_file_names} =
       Application.fetch_env(:www_arjunsatarkar_net, :template_file_names)
 

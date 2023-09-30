@@ -8,7 +8,7 @@ defmodule WwwArjunsatarkarNet.Application do
 
   @impl true
   def start(_type, _args) do
-    WwwArjunsatarkarNet.Template.compile()
+    WwwArjunsatarkarNet.Template.compile_templates()
     WwwArjunsatarkarNet.Cache.init()
 
     {:ok, port} = Application.fetch_env(:www_arjunsatarkar_net, :port)

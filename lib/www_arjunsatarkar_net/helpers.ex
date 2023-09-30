@@ -47,4 +47,19 @@ defmodule WwwArjunsatarkarNet.Helpers do
 
     result
   end
+
+  @spec get_canonical_url(binary, binary | nil) :: binary
+  def get_canonical_url(path, query \\ nil) do
+    {:ok, canonical_host} = Application.fetch_env(:www_arjunsatarkar_net, :canonical_host)
+    {:ok, canonical_port} = Application.fetch_env(:www_arjunsatarkar_net, :canonical_port)
+    {:ok, canonical_scheme} = Application.fetch_env(:www_arjunsatarkar_net, :canonical_scheme)
+
+    URI.to_string(%URI{
+      host: canonical_host,
+      path: path,
+      port: canonical_port,
+      scheme: canonical_scheme,
+      query: query
+    })
+  end
 end
