@@ -1,4 +1,6 @@
 defmodule WwwArjunsatarkarNet.Router do
+  require WwwArjunsatarkarNet.Cache
+  alias WwwArjunsatarkarNet.Cache
   alias WwwArjunsatarkarNet.Template
   alias WwwArjunsatarkarNet.Helpers
   use Plug.Router
@@ -42,10 +44,13 @@ defmodule WwwArjunsatarkarNet.Router do
         scheme: Atom.to_string(conn.scheme)
       })
 
-    {page, _bindings} =
-      Code.eval_quoted(Template.get_compiled("site/index.html.eex"),
-        canonical_url: canonical_url,
-        generate_head_tags: &Helpers.generate_head_tags/3
+    page =
+      Cache.get_cached("/",
+        else:
+          Template.eval_compiled("site/index.html.eex",
+            canonical_url: canonical_url,
+            generate_head_tags: &Helpers.generate_head_tags/3
+          )
       )
 
     conn
@@ -62,9 +67,12 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   match _ do
-    {page, _bindings} =
-      Code.eval_quoted(Template.get_compiled("site/404.html.eex"),
-        generate_head_tags: &Helpers.generate_head_tags/1
+    page =
+      Cache.get_cached("@404",
+        else:
+          Template.eval_compiled("site/404.html.eex",
+            generate_head_tags: &Helpers.generate_head_tags/1
+          )
       )
 
     conn

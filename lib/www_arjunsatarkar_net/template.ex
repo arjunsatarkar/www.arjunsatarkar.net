@@ -31,9 +31,10 @@ defmodule WwwArjunsatarkarNet.Template do
     end
   end
 
-  @spec get_compiled(binary()) :: any
-  def get_compiled(file_name) do
-    [{_file_name, page}] = :ets.lookup(:compiled_templates, file_name)
+  @spec eval_compiled(binary(), Code.binding(), Macro.Env.t() | keyword()) :: binary()
+  def eval_compiled(file_name, binding \\ [], env_or_opts \\ []) do
+    [{_file_name, compiled}] = :ets.lookup(:compiled_templates, file_name)
+    {page, _bindings} = Code.eval_quoted(compiled, binding, env_or_opts)
     page
   end
 end
