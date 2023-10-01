@@ -1,7 +1,6 @@
 defmodule WwwArjunsatarkarNet.Router do
   alias WwwArjunsatarkarNet.Cache
   alias WwwArjunsatarkarNet.Helpers
-  alias WwwArjunsatarkarNet.Template
   require WwwArjunsatarkarNet.Cache
   require Logger
   use Plug.Router
@@ -69,14 +68,14 @@ defmodule WwwArjunsatarkarNet.Router do
     to_cache = [
       {
         "/",
-        Template.eval_compiled("site/index.html.eex",
+        EEx.eval_file("site/index.html.eex",
           canonical_url: Helpers.get_canonical_url("/"),
           generate_head_tags: &Helpers.generate_head_tags/3
         )
       },
       {
         "@404",
-        Template.eval_compiled("site/404.html.eex",
+        EEx.eval_file("site/404.html.eex",
           generate_head_tags: &Helpers.generate_head_tags/1
         )
       }

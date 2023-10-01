@@ -4,7 +4,7 @@ defmodule WwwArjunsatarkarNet.Template do
   @spec compile_templates :: nil
   def compile_templates do
     {:ok, template_file_names} =
-      Application.fetch_env(:www_arjunsatarkar_net, :template_file_names)
+      Application.fetch_env(:www_arjunsatarkar_net, :templates_to_compile)
 
     parent = self()
     # Let's use a separate process that sleeps forever when done to ensure that the only thing

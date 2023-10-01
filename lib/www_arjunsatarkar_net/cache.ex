@@ -1,4 +1,5 @@
 defmodule WwwArjunsatarkarNet.Cache do
+  require Logger
   @spec init :: nil
   def init do
     :ets.new(:cache, [:named_table, :public, {:read_concurrency, true}])
@@ -14,8 +15,12 @@ defmodule WwwArjunsatarkarNet.Cache do
   @spec lookup(String.t()) :: {:ok, any} | :error
   def lookup(location) do
     case :ets.lookup(:cache, location) do
-      [{^location, content}] -> {:ok, content}
-      [] -> :error
+      [{^location, content}] ->
+        Logger.debug("Fetched #{location} from cache.")
+        {:ok, content}
+
+      [] ->
+        :error
     end
   end
 
