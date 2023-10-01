@@ -1,8 +1,9 @@
 defmodule WwwArjunsatarkarNet.Router do
-  require WwwArjunsatarkarNet.Cache
   alias WwwArjunsatarkarNet.Cache
-  alias WwwArjunsatarkarNet.Template
   alias WwwArjunsatarkarNet.Helpers
+  alias WwwArjunsatarkarNet.Template
+  require WwwArjunsatarkarNet.Cache
+  require Logger
   use Plug.Router
   plug(Plug.Logger)
 
@@ -20,30 +21,12 @@ defmodule WwwArjunsatarkarNet.Router do
   )
 
   plug(Plug.Static, at: "/static", from: "site/static")
+
   plug(:match)
   plug(:dispatch)
 
-  @spec put_html_content_type(Plug.Conn.t()) :: Plug.Conn.t()
-  defp put_html_content_type(conn) do
-    put_resp_content_type(conn, "text/html")
-  end
-
-  @spec redirect(Plug.Conn.t(), binary) :: Plug.Conn.t()
-  defp redirect(conn, dest) do
-    conn
-    |> put_resp_header("Location", dest)
-    |> send_resp(302, "")
-  end
-
   get "/" do
-    page =
-      Cache.get_cached("/",
-        else:
-          Template.eval_compiled("site/index.html.eex",
-            canonical_url: Helpers.get_canonical_url("/"),
-            generate_head_tags: &Helpers.generate_head_tags/3
-          )
-      )
+    {:ok, page} = Cache.lookup("/")
 
     conn
     |> put_html_content_type()
@@ -59,13 +42,7 @@ defmodule WwwArjunsatarkarNet.Router do
   end
 
   match _ do
-    page =
-      Cache.get_cached("@404",
-        else:
-          Template.eval_compiled("site/404.html.eex",
-            generate_head_tags: &Helpers.generate_head_tags/1
-          )
-      )
+    {:ok, page} = Cache.lookup("@404")
 
     conn
     |> put_html_content_type()
@@ -73,6 +50,44 @@ defmodule WwwArjunsatarkarNet.Router do
       404,
       page
     )
+  end
+
+  @spec put_html_content_type(Plug.Conn.t()) :: Plug.Conn.t()
+  defp put_html_content_type(conn) do
+    put_resp_content_type(conn, "text/html; charset=utf-8")
+  end
+
+  @spec redirect(Plug.Conn.t(), binary) :: Plug.Conn.t()
+  defp redirect(conn, dest) do
+    conn
+    |> put_resp_header("Location", dest)
+    |> send_resp(302, "")
+  end
+
+  @spec precache :: nil
+  def precache do
+    to_cache = [
+      {
+        "/",
+        Template.eval_compiled("site/index.html.eex",
+          canonical_url: Helpers.get_canonical_url("/"),
+          generate_head_tags: &Helpers.generate_head_tags/3
+        )
+      },
+      {
+        "@404",
+        Template.eval_compiled("site/404.html.eex",
+          generate_head_tags: &Helpers.generate_head_tags/1
+        )
+      }
+    ]
+
+    for {location, content} <- to_cache do
+      Logger.debug("Pre-caching #{location} ...")
+      Cache.insert(location, content)
+    end
+
+    nil
   end
 
   def start_link do

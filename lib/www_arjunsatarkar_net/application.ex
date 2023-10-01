@@ -8,8 +8,15 @@ defmodule WwwArjunsatarkarNet.Application do
 
   @impl true
   def start(_type, _args) do
+    Logger.info("Compiling templates...")
     WwwArjunsatarkarNet.Template.compile_templates()
+    Logger.info("Finished compiling templates.")
+
     WwwArjunsatarkarNet.Cache.init()
+
+    Logger.info("Pre-caching...")
+    WwwArjunsatarkarNet.Router.precache()
+    Logger.info("Finished pre-caching.")
 
     {:ok, port} = Application.fetch_env(:www_arjunsatarkar_net, :port)
 

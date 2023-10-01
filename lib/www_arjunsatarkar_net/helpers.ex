@@ -1,5 +1,5 @@
 defmodule WwwArjunsatarkarNet.Helpers do
-  @spec generate_head_tags(binary, binary | nil, binary | nil) :: binary
+  @spec generate_head_tags(String.t(), String.t() | nil, String.t() | nil) :: String.t()
   def generate_head_tags(title, canonical_url \\ nil, description \\ nil) do
     result =
       """
@@ -48,7 +48,7 @@ defmodule WwwArjunsatarkarNet.Helpers do
     result
   end
 
-  @spec get_canonical_url(binary, binary | nil) :: binary
+  @spec get_canonical_url(String.t(), String.t() | nil) :: String.t()
   def get_canonical_url(path, query \\ nil) do
     {:ok, canonical_host} = Application.fetch_env(:www_arjunsatarkar_net, :canonical_host)
     {:ok, canonical_port} = Application.fetch_env(:www_arjunsatarkar_net, :canonical_port)

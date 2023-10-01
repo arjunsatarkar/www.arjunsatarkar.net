@@ -5,16 +5,28 @@ defmodule WwwArjunsatarkarNet.Cache do
     nil
   end
 
-  @spec get_cached(binary(), [{:else, any}]) :: Macro.t()
-  defmacro get_cached(location, else: content) do
+  @spec insert(String.t(), any) :: nil
+  def insert(location, content) do
+    :ets.insert_new(:cache, {location, content})
+    nil
+  end
+
+  @spec lookup(String.t()) :: {:ok, any} | :error
+  def lookup(location) do
+    case :ets.lookup(:cache, location) do
+      [{^location, content}] -> {:ok, content}
+      [] -> :error
+    end
+  end
+
+  @spec try_cache(String.t(), [{:else, any}]) :: Macro.t()
+  defmacro try_cache(location, else: content) do
     quote do
-      case :ets.lookup(:cache, unquote(location)) do
-        [{unquote(location), cached_content}] ->
-          Logger.bare_log(:debug, "Fetched #{unquote(location)} from the cache.")
+      case WwwArjunsatarkarNet.Cache.lookup(unquote(location)) do
+        {:ok, cached_content} ->
           cached_content
 
-        _ ->
-          Logger.bare_log(:debug, "Cache miss for #{unquote(location)}, adding it...")
+        :error ->
           :ets.insert_new(:cache, {unquote(location), unquote(content)})
           unquote(content)
       end
